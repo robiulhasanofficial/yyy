@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+   <link rel="icon" type="image/png" href="img/">
+  <title>Yoth Yard</title>
+  <style>
+    :root{
+      --accent:#ffb703;
+      --bg:#0f1724;
+      --card:#0b1220;
+      --glass: rgba(255,255,255,0.06);
+      --text:#e6eef8;
+      --muted: #9fb0c8;
+      --radius:16px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;background:linear-gradient(180deg,var(--bg),#071027);color:var(--text);}
+    .wrap{max-width:1200px;margin:auto;padding:24px}
+
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+    header h1{font-size:1.8rem;margin:0}
+    header p{margin:0;color:var(--muted)}
+
+    /* Carousel */
+    .carousel{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--card);box-shadow:0 6px 30px rgba(2,6,23,0.6);margin-bottom:20px}
+    .slides{display:flex;transition:transform .6s cubic-bezier(.22,.9,.3,1);}
+    .slide{min-width:100%;position:relative;height:380px;background-size:cover;background-position:center;cursor:pointer}
+    .slide .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.22),rgba(0,0,0,0.5));display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+    .slide h2{margin:0;font-size:1.6rem}
+    .slide p{margin:6px 0 0;color:var(--muted)}
+
+    /* arrows */
+    .nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 12px}
+    .btn{background:var(--glass);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--text);cursor:pointer}
+
+    /* dots */
+    .dots{display:flex;gap:8px;position:absolute;left:50%;transform:translateX(-50%);bottom:12px}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.18);cursor:pointer}
+    .dot.active{background:var(--accent);box-shadow:0 0 10px rgba(255,183,3,0.35)}
+
+    /* banner grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);cursor:pointer;transition:transform 0.3s ease}
+    .card:hover{transform:scale(1.03)}
+    .card img{width:100%;height:160px;object-fit:cover;display:block}
+    .card .body{padding:12px}
+    .card h3{margin:0 0 6px;font-size:1.05rem}
+    .card p{margin:0;color:var(--muted);font-size:0.95rem}
+
+    footer{margin-top:28px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* Lightbox */
+    #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);align-items:center;justify-content:center;z-index:9999}
+    #lightbox img{max-width:90%;max-height:90%;cursor:zoom-in;transition:transform 0.3s ease}
+
+    /* responsive */
+    @media (max-width:640px){
+      .slide{height:240px}
+      header h1{font-size:1.4rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+        <img width="44" height="44"viewBox="0 0 24 24" src="img/create-a-flat-vector-logo-showing-book-p_4FPNyffjR5CzuovYTqnZcQ_UzTfgxNtRMKKQvp0hitxIA.jpeg" alt="" srcset="">
+      <div>
+        <h1>Yoth Yard</h1>
+        <p>"Youth Yard হলো তরুণদের জন্য এক অনন্য আড্ডাস্থল, যেখানে পড়াশোনার ফাঁকে পাওয়া যাবে পেট ভরানো তৃপ্তি।</p>
+      </div>
+    </header>
+
+    <!-- Carousel -->
+    <div class="carousel" id="carousel">
+      <div class="slides" id="slides">
+        <div class="slide" style="background-image:url('img/ChatGPT\ Image\ Aug\ 8\,\ 2025\,\ 06_48_44\ PM.png')" onclick="openLightbox(this.style.backgroundImage)">
+          <div class="overlay"><h2>🥣 খিচুড়ি + হাফ ডিম = মাত্র ২০ টাকা <br>
+🥚 খিচুড়ি + ফুল ডিম = মাত্র ৩০ টাকা</h2><p>আজকের চেষ্টা তোমার আগামীকাল বদলাবে।</p></div>
+        </div>
+        <div class="slide" style="background-image:url('img/Welcome.png')" onclick="openLightbox(this.style.backgroundImage)">
+          <div class="overlay"><h2>প্রযুক্তির সাথে এগিয়ে চলো</h2><p>ডিজিটাল ভবিষ্যতের জন্য প্রস্তুত হও।</p></div>
+        </div>
+        <div class="slide" style="background-image:url('img/Welcome.png')" onclick="openLightbox(this.style.backgroundImage)">
+          <div class="overlay"><h2>দৃঢ় মনোবল, সফলতা নিশ্চিত</h2><p>কাজ শুরু করো আজই, সাফল্য অপেক্ষায়।</p></div>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn" id="prev">◀</button>
+        <button class="btn" id="next">▶</button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <!-- Grid of banners -->
+    <div class="grid">
+      <div class="card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="img/design_300dpi.png" alt="">
+        <div class="body"><h3></h3><p></p></div>
+      </div>
+      <div class="card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="img/design_300dpi.png" alt="">
+        <div class="body"><h3></h3><p></p></div>
+      </div>
+      <div class="card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="img/Welcome.png" alt="">
+        <div class="body"><h3>প্রেরণা জাগাও</h3><p>নিজেকে নতুনভাবে গড়ে তোলো।</p></div>
+      </div>
+      <div class="card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="img/ChatGPT Image Aug 11, 2025, 08_48_47 AM.png" alt="">
+        <div class="body"><h3>সাফল্যের পথে</h3><p>ধাপে ধাপে এগিয়ে যাও।</p></div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="if(event.target.id==='lightbox')closeLightbox()">
+      <img id="lightbox-img" src="" onclick="toggleZoom(event)">
+    </div>
+
+    <!-- Footer Section -->
+<footer style="background: linear-gradient(45deg, #ff6b6b, #f7d794, #1dd1a1, #48dbfb); background-size: 400% 400%; animation: gradientBG 10s ease infinite; color: white; padding: 40px 20px; font-family: sans-serif;">
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: auto;">
+    
+    <!-- Logo & About -->
+    <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
+      <h2 style="margin-bottom: 10px; font-size: 24px;">Youth Yard</h2>
+      <p>আপনার হাতে পৌঁছে দেই স্বাস্থ্যসম্মত খাবার, দ্রুত ডেলিভারির সাথে।</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h3 style="margin-bottom: 10px;">দ্রুত লিঙ্ক</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: white; text-decoration: none;">হোম</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">আমাদের সম্পর্কে</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">মেনু</a></li>
+        <li><a href="#" style="color: white; text-decoration: none;">যোগাযোগ</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h3 style="margin-bottom: 10px;">যোগাযোগ</h3>
+      <div style="display: flex; gap: 15px;">
+        <a href="#" style="color: white; font-size: 22px;" class="social-icon">🌐</a>
+        <a href="#" style="color: white; font-size: 22px;" class="social-icon">📧</a>
+        <a href="#" style="color: white; font-size: 22px;" class="social-icon">📘</a>
+        <a href="#" style="color: white; font-size: 22px;" class="social-icon">📷</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div style="text-align: center; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px; font-size: 14px;">
+    © 2025 Youth Yard. সর্বস্বত্ব সংরক্ষিত।
+  </div>
+</footer>
+
+<!-- Gradient Animation -->
+<style>
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.social-icon:hover {
+  color: yellow;
+  text-shadow: 0 0 10px yellow, 0 0 20px yellow;
+  transform: scale(1.2);
+  transition: all 0.3s ease-in-out;
+}
+</style>
+
+  </div>
+
+  <script>
+    const slidesEl=document.getElementById('slides');
+    const total=slidesEl.children.length;
+    let index=0;
+    const dotsEl=document.getElementById('dots');
+    let autoplay=true;
+
+    function go(i){index=(i+total)%total;slidesEl.style.transform=`translateX(${-index*100}%)`;updateDots();}
+    function prev(){go(index-1)}
+    function next(){go(index+1)}
+
+    for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot';d.addEventListener('click',()=>go(i));dotsEl.appendChild(d);}
+    function updateDots(){[...dotsEl.children].forEach((d,i)=>d.classList.toggle('active',i===index));}
+    document.getElementById('prev').addEventListener('click',()=>{prev();autoplay=false});
+    document.getElementById('next').addEventListener('click',()=>{next();autoplay=false});
+    setInterval(()=>{if(autoplay)next()},4000);
+    go(0);
+
+    let zoomed=false;
+    function openLightbox(src){
+      let cleanSrc=src.replace(/^url\\(\"?|\"?\\)$/g,'').replace(/url\\(|\\)$/g,'').replace(/\"/g,'');
+      document.getElementById('lightbox-img').src=cleanSrc;
+      document.getElementById('lightbox').style.display='flex';
+      zoomed=false;
+      document.getElementById('lightbox-img').style.transform='scale(1)';
+    }
+    function closeLightbox(){document.getElementById('lightbox').style.display='none';}
+    function toggleZoom(e){zoomed=!zoomed;e.target.style.transform=zoomed?'scale(2)':'scale(1)';e.target.style.cursor=zoomed?'zoom-out':'zoom-in';}
+  </script>
+</body>
+</html>
